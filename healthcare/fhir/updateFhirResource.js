@@ -30,6 +30,7 @@ const main = (
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     }),
     headers: {'Content-Type': 'application/fhir+json'},
+    responseType: 'json',
   });
 
   const updateFhirResource = async () => {
