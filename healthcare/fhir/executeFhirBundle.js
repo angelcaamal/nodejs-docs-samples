@@ -30,6 +30,7 @@ function main(
       scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     }),
     headers: {'Content-Type': 'application/fhir+json'},
+    responseType: 'json',
   });
   const fs = require('fs');
 
@@ -50,7 +51,7 @@ function main(
         request
       );
     console.log('FHIR bundle executed');
-    console.log(resource.data);
+    console.log(JSON.stringify(resource.data, null, 2));
   }
 
   executeFhirBundle();
