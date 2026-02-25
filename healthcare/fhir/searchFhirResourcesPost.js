@@ -45,7 +45,12 @@ const main = (
     // specify the following params:
     // params = {'family:exact' : 'Smith'};
     const client = await auth.getClient();
-    const response = await client.request({url, method: 'POST', params});
+    const response = await client.request({
+      url,
+      method: 'POST',
+      params,
+      responseType: 'json',
+    });
     const resources = response.data.entry;
     console.log(`Resources found: ${resources.length}`);
     console.log(JSON.stringify(resources, null, 2));
