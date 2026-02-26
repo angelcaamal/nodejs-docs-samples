@@ -43,11 +43,18 @@ const main = (
     const name = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}/fhir/${resourceType}/${resourceId}`;
     const request = {name};
 
-    const resource =
-      await healthcare.projects.locations.datasets.fhirStores.fhir.read(
-        request
+    try {
+      const resource =
+        await healthcare.projects.locations.datasets.fhirStores.fhir.read(
+          request
+        );
+      console.log(`Got ${resourceType} resource:\n`, resource.data);
+    } catch (error) {
+      console.error(
+        `Error getting ${resourceType} resource:`,
+        error.message || error
       );
-    console.log(`Got ${resourceType} resource:\n`, resource.data);
+    }
   };
 
   getFhirResource();
