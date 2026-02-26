@@ -48,11 +48,18 @@ const main = (
     const body = {resourceType: resourceType, id: resourceId, active: true};
     const request = {name, requestBody: body};
 
-    const resource =
-      await healthcare.projects.locations.datasets.fhirStores.fhir.update(
-        request
+    try {
+      const resource =
+        await healthcare.projects.locations.datasets.fhirStores.fhir.update(
+          request
+        );
+      console.log(`Updated ${resourceType} resource:\n`, resource.data);
+    } catch (error) {
+      console.error(
+        `Error updating ${resourceType} resource:`,
+        error.message || error
       );
-    console.log(`Updated ${resourceType} resource:\n`, resource.data);
+    }
   };
 
   updateFhirResource();
