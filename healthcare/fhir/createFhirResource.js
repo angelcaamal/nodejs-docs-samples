@@ -51,13 +51,17 @@ function main(
     // const resourceType = 'Patient';
     const parent = `projects/${projectId}/locations/${cloudRegion}/datasets/${datasetId}/fhirStores/${fhirStoreId}`;
 
-    const request = {parent, type: resourceType, requestBody: body};
-    const resource =
-      await healthcare.projects.locations.datasets.fhirStores.fhir.create(
-        request
-      );
-    console.log(`Created FHIR resource with ID ${resource.data.id}`);
-    console.log(resource.data);
+    try {
+      const request = {parent, type: resourceType, requestBody: body};
+      const resource =
+        await healthcare.projects.locations.datasets.fhirStores.fhir.create(
+          request
+        );
+      console.log(`Created FHIR resource with ID ${resource.data.id}`);
+      console.log(resource.data);
+    } catch (error) {
+      console.error('Error creating FHIR resource:', error.message || error);
+    }
   }
 
   createFhirResource();
